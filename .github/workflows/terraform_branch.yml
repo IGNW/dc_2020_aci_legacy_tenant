@@ -1,0 +1,25 @@
+name: Branch_Testing
+
+on: 
+  push:
+    branches-ignore: master
+
+jobs:
+
+  test_build_and_run:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build the Terraform docker image
+      run: |
+        echo Building a Terraform Docker container with our new configuration
+        cd terraform
+        docker build . --file Dockerfile --tag ignw/dc-2020-aci-terraform:latest
+
+    - name: Apply the terraform config
+      run: |
+        echo Running Terraform apply
+        docker run ignw/dc-2020-aci-terraform:latest apply.sh
