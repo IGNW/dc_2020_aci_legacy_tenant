@@ -10,4 +10,3 @@ resource "aci_application_epg" "epg" {
   name = each.value
   relation_fv_rs_bd = "${aci_bridge_domain.bridge_domain.name}"
 }
-
