@@ -1,4 +1,3 @@
-
 resource "aci_application_profile" "app_profile" {
   tenant_dn  = "${aci_tenant.tenant.id}"
   name       = "web_app"
