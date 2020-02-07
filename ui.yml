@@ -2,6 +2,8 @@ value_1:
     type: text
 value_2:
     type: checkbox 
+value_3:
+    type: checkbox
 github_new_branch:
     type: text
 github_username:

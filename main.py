@@ -15,14 +15,15 @@ def main(**kwargs):
     )
 
     new_branch = kwargs['github_new_branch']
+    data = {}
+    for arg, argv in kwargs.items():
+        if "github" not in arg:
+            data[arg] = argv
 
     if s.validate_scm_creds():
         s.clone_private_repo("tmp")
         s.create_new_branch_in_repo(new_branch)
-        data = {
-            "value_1": kwargs['value_1'],
-            "value_2": kwargs['value_2']
-        }
+
         s.write_data_to_file_in_repo(data, file_path='data', file_name='myfile')
         s.push_data_to_remote_repo()
         s.delete_local_copy_of_repo()
