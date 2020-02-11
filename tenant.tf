@@ -1,21 +1,14 @@
 
 resource "aci_tenant" "tenant" {
-  name = var.tenant_name
+  name = "IceStone"
 }
 
 resource "aci_vrf" "vrf" {
   tenant_dn = "${aci_tenant.tenant.id}"
-  name = var.vrf_name
+  name = "IceStone_VRF"
 }
 
-resource "aci_bridge_domain" "bridge_domain" {
-  tenant_dn = "${aci_tenant.tenant.id}"
-  name = var.bd_name
-  relation_fv_rs_ctx = "${aci_vrf.vrf.name}"
-}
-
-resource "aci_subnet" "subnet" {
-  for_each = toset(var.subnets)
-  bridge_domain_dn = "${aci_bridge_domain.bridge_domain.id}"
-  ip = each.value
+resource "aci_application_profile" "app_profile" {
+  tenant_dn  = "${aci_tenant.tenant.id}"
+  name       = "web_app"
 }
