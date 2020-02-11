@@ -6,7 +6,7 @@ resource "aci_bridge_domain" "bridge_domain" {
 
 resource "aci_subnet" "subnet" {
   bridge_domain_dn = "${aci_bridge_domain.bridge_domain.id}"
-  name = "192.168.1.1/24"
+  ip = "192.168.1.1/24"
 }
 
 resource "aci_application_epg" "epg" {
