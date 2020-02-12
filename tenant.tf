@@ -9,5 +9,5 @@ resource "aci_vrf" "vrf" {
 
 resource "aci_application_profile" "app_profile" {
   tenant_dn  = "${aci_tenant.tenant.id}"
-  name       = "Legacy_Networks"
+  name       = "LegacyNetworks"
 }
