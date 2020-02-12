@@ -1,4 +1,3 @@
-
 resource "aci_tenant" "tenant" {
   name = "Icestone"
 }
