@@ -1,4 +1,4 @@
-epg_name:
+vlan:
     type: text
 ip_address:
     type: ip_cidr
