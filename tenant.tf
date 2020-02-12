@@ -1,14 +1,14 @@
 
 resource "aci_tenant" "tenant" {
-  name = "IceStone"
+  name = "Icestone"
 }
 
 resource "aci_vrf" "vrf" {
   tenant_dn = "${aci_tenant.tenant.id}"
-  name = "IceStone_VRF"
+  name = "Icestone"
 }
 
 resource "aci_application_profile" "app_profile" {
   tenant_dn  = "${aci_tenant.tenant.id}"
-  name       = "web_app"
+  name       = "Legacy_Networks"
 }
