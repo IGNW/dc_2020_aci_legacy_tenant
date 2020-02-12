@@ -1,7 +1,7 @@
 resource "aci_bridge_domain" "bridge_domain_192_168_3_V30" {
   tenant_dn               = "${aci_tenant.tenant.id}"
   relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
-  name                    = "_192_168_3_V30"
+  name                    = "192_168_3_V30"
 }
 
 resource "aci_subnet" "subnet_192_168_3_V30" {
