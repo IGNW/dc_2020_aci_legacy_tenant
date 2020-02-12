@@ -7,6 +7,7 @@ resource "aci_bridge_domain" "bridge_domain_192_168_2_V200" {
 resource "aci_subnet" "subnet_192_168_2_V200" {
   bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_192_168_2_V200.id}"
   ip                      = "192.168.2.1/24"
+  scope                   = "private"
 }
 
 resource "aci_application_epg" "epg_192_168_2_V200" {
