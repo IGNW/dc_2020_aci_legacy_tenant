@@ -17,18 +17,17 @@ def main(**kwargs):
     description = kwargs['description']
     ip_address = kwargs['ip_address']
     ip_octects = ip_address.split('.')
-    vlan = kwargs['vlan']
-    ip_vlan_w_underscores = f"{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}_V{vlan}"
-    ip_vlan_w_dots= f"{ip_octects[0]}.{ip_octects[1]}.{ip_octects[2]}_V{vlan}"
+    name = kwargs['name']
+    ip_vlan_w_underscores = f"{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}_{name}"
     scope = kwargs['routing']
     new_branch =  f'{ip_vlan_w_underscores}_{str_now}'
 
 
-    tf_file_name = f'network_{ ip_vlan_w_dots }'
+    tf_file_name = f'network_{ name }'
 
     terraform_file = template.render(
         ip_vlan_w_underscores=ip_vlan_w_underscores,
-        ip_vlan_w_dots=ip_vlan_w_dots,
+        name=name,
         ip_address=ip_address,
         description=description,
         scope=scope
