@@ -1,5 +1,6 @@
-vlan:
+name:
     type: text
+    regex: ^[a-zA-Z_]*$
 ip_address:
     type: ip_cidr
 description:
@@ -9,8 +10,6 @@ routing:
     options:
         - private
         - public
-github_new_branch:
-    type: text
 github_username:
     type: text
 github_password:
