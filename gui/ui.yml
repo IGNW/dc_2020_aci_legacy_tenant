@@ -1,5 +1,6 @@
 vlan:
     type: text
+    regex: ^[0-9]*$
 ip_address:
     type: ip_cidr
 description:
