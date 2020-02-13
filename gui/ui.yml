@@ -10,8 +10,6 @@ routing:
     options:
         - private
         - public
-github_new_branch:
-    type: text
 github_username:
     type: text
 github_password:

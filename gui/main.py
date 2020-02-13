@@ -1,17 +1,14 @@
 from SourceControlMgmt.SourceControlMgmt import SourceControlMgmt
 from jinja2 import FileSystemLoader, Environment
+from datetime import datetime
 
 def pre():
     # No data to pull from anything
     return locals()
 
 def main(**kwargs):
-
-    new_branch = kwargs['github_new_branch']
-    data = {}
-    for arg, argv in kwargs.items():
-        if "github" not in arg:
-            data[arg] = argv
+    now = datetime.now()
+    str_now = now.strftime("%Y%m%d-%H%M%S")
 
     templateLoader = FileSystemLoader(searchpath=f'./repos/dc_2020_aci_tenants/gui')
     templateEnv = Environment(loader=templateLoader)
@@ -24,6 +21,8 @@ def main(**kwargs):
     ip_vlan_w_underscores = f"{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}_V{vlan}"
     ip_vlan_w_dots= f"{ip_octects[0]}.{ip_octects[1]}.{ip_octects[2]}_V{vlan}"
     scope = kwargs['routing']
+    new_branch =  f'{ip_vlan_w_underscores}_{str_now}'
+
 
     tf_file_name = f'network_{ ip_vlan_w_dots }'
 
@@ -52,7 +51,11 @@ def main(**kwargs):
         s.push_data_to_remote_repo()
         s.delete_local_copy_of_repo()
         s.get_all_current_branches()
-        pr_results = s.create_git_hub_pull_request(destination_branch="master", source_branch=new_branch, title="Test Pull Request", body="A test pull request")
+        pr_results = s.create_git_hub_pull_request(
+            destination_branch="master", 
+            source_branch=new_branch, 
+            title=f"Pull Request {ip_vlan_w_underscores}", 
+            body="")
         return pr_results 
     else:
         return {'Results:': 'Invalid Credentials'}
