@@ -1,0 +1,18 @@
+resource "aci_bridge_domain" "bridge_domain_tiges_order_tweaks_10_20_30" {
+  tenant_dn               = "${aci_tenant.tenant.id}"
+  relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
+  name                    = "tiges_order_tweaks"
+}
+
+resource "aci_subnet" "subnet_tiges_order_tweaks_10_20_30" {
+  bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_tiges_order_tweaks_10_20_30.id}"
+  ip                      = "10.20.30.40/8"
+  scope                   = "public"
+}
+
+resource "aci_application_epg" "epg_tiges_order_tweaks_10_20_30" {
+  application_profile_dn  = "${aci_application_profile.app_profile.id}"
+  name                    = "${aci_bridge_domain.bridge_domain_tiges_order_tweaks_10_20_30.name}"
+  description             = "does it still work"
+  relation_fv_rs_bd       = "${aci_bridge_domain.bridge_domain_tiges_order_tweaks_10_20_30.name}"
+}
