@@ -18,15 +18,15 @@ def main(**kwargs):
     ip_address = kwargs['ip_address']
     ip_octects = ip_address.split('.')
     name = kwargs['name']
-    ip_vlan_w_underscores = f"{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}_{name}"
+    name_ip_w_underscores = f"{name}_{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}"
     scope = kwargs['routing']
-    new_branch =  f'{ip_vlan_w_underscores}_{str_now}'
+    new_branch =  f'{name_ip_w_underscores}_{str_now}'
 
 
     tf_file_name = f'network_{ name }'
 
     terraform_file = template.render(
-        ip_vlan_w_underscores=ip_vlan_w_underscores,
+        name_ip_w_underscores=name_ip_w_underscores,
         name=name,
         ip_address=ip_address,
         description=description,
@@ -53,7 +53,7 @@ def main(**kwargs):
         pr_results = s.create_git_hub_pull_request(
             destination_branch="master", 
             source_branch=new_branch, 
-            title=f"Pull Request {ip_vlan_w_underscores}", 
+            title=f"Pull Request {name_ip_w_underscores}", 
             body="")
         return pr_results 
     else:
