@@ -17,4 +17,4 @@ RUN mkdir -p /usr/local/ignw
 WORKDIR /usr/local/ignw
 ADD * ./
 
-ENTRYPOINT ["bash"]
+RUN terraform init
