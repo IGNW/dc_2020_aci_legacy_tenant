@@ -1,6 +1,6 @@
 # dc_2020_aci_tenants
-[![Actions Status](https://github.com/ignw/dc-2020-aci-terraform/workflows/Production/badge.svg)](https://github.com/ignw/dc-2020-aci-terraform/actions)
-[![Actions Status](https://github.com/ignw/dc-2020-aci-terraform/workflows/Branch_Testing/badge.svg)](https://github.com/ignw/dc-2020-aci-terraform/actions)
+![Production](https://github.com/IGNW/dc_2020_aci_tenants/workflows/Production/badge.svg)
+![Branch](https://github.com/IGNW/dc_2020_aci_tenants/workflows/Branch/badge.svg)
 
 Cisco DevNet Create - Cisco ACI management with Terraform
 
