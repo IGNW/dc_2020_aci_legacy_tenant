@@ -1,4 +1,4 @@
-name: Branch_Testing
+name: Branch
 
 on: 
   push:
@@ -6,24 +6,26 @@ on:
 
 jobs:
 
-  test_build_and_run:
-
+  Build:
     runs-on: self-hosted
-
     steps:
     - uses: actions/checkout@v1
 
     - name: Build the Terraform docker image
-      run: |
-        echo Building a Terraform Docker container with our new configuration
-        docker build . --file Dockerfile --tag ignw/dc-2020-aci-terraform:latest
+      run: docker build . --file Dockerfile --tag ignw/dc-2020-aci-terraform:latest
+
+  Test:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
 
     - name: Validate the terraform config
-      run: |
-        echo Running Terraform validate
-        docker run ignw/dc-2020-aci-terraform:latest terraform validate
+      run: docker run ignw/dc-2020-aci-terraform:latest terraform validate
+
+  Plan:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
 
     - name: Plan the terraform config
-      run: |
-        echo Running Terraform apply
-        docker run ignw/dc-2020-aci-terraform:latest terraform plan
+      run: docker run ignw/dc-2020-aci-terraform:latest terraform plan
