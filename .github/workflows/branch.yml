@@ -18,7 +18,12 @@ jobs:
         echo Building a Terraform Docker container with our new configuration
         docker build . --file Dockerfile --tag ignw/dc-2020-aci-terraform:latest
 
-    - name: Apply the terraform config
+    - name: Validate the terraform config
+      run: |
+        echo Running Terraform validate
+        docker run ignw/dc-2020-aci-terraform:latest terraform validate
+
+    - name: Plan the terraform config
       run: |
         echo Running Terraform apply
-        docker run ignw/dc-2020-aci-terraform:latest apply.sh
+        docker run ignw/dc-2020-aci-terraform:latest terraform plan
