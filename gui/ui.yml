@@ -1,6 +1,6 @@
 name:
     type: text
-    regex: ^[a-zA-Z_]*$
+    regex: ^[a-zA-Z_0-9]*$
 ip_address:
     type: ip_cidr
 description:
