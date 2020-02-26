@@ -9,10 +9,11 @@ def pre():
 
 
 def main(**kwargs):
+    repo_name = 'dc_2020_aci_legacy_tenant'
     now = datetime.now()
     str_now = now.strftime("%Y%m%d-%H%M%S")
 
-    templateLoader = FileSystemLoader(searchpath=f'./repos/dc_2020_aci_legacy_tenant/gui')
+    templateLoader = FileSystemLoader(searchpath=f'./repos/{repo_name}/gui')
     templateEnv = Environment(loader=templateLoader)
     template = templateEnv.get_template('terraform.j2')
 
@@ -37,7 +38,7 @@ def main(**kwargs):
         username=kwargs['github_username'],
         password=kwargs['github_password'],
         email=kwargs['github_email_address'],
-        repo_name='dc_2020_aci_tenants',
+        repo_name=repo_name,
         repo_owner='IGNW',
         friendly_name='DevNet Connect 2020 ACI Tenants'
     )
