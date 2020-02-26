@@ -1,0 +1,18 @@
+resource "aci_bridge_domain" "bridge_domain_docker_test_128_0_0" {
+  tenant_dn               = "${aci_tenant.tenant.id}"
+  relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
+  name                    = "docker_test"
+}
+
+resource "aci_subnet" "subnet_docker_test_128_0_0" {
+  bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_docker_test_128_0_0.id}"
+  ip                      = "128.0.0.3/27"
+  scope                   = "public"
+}
+
+resource "aci_application_epg" "epg_docker_test_128_0_0" {
+  application_profile_dn  = "${aci_application_profile.app_profile.id}"
+  name                    = "${aci_bridge_domain.bridge_domain_docker_test_128_0_0.name}"
+  description             = "testing project in a repo"
+  relation_fv_rs_bd       = "${aci_bridge_domain.bridge_domain_docker_test_128_0_0.name}"
+}
