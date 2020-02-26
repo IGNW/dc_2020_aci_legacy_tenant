@@ -1,0 +1,18 @@
+resource "aci_bridge_domain" "bridge_domain_video_for_tige_129_2_3" {
+  tenant_dn               = "${aci_tenant.tenant.id}"
+  relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
+  name                    = "video_for_tige"
+}
+
+resource "aci_subnet" "subnet_video_for_tige_129_2_3" {
+  bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_video_for_tige_129_2_3.id}"
+  ip                      = "129.2.3.4/22"
+  scope                   = "private"
+}
+
+resource "aci_application_epg" "epg_video_for_tige_129_2_3" {
+  application_profile_dn  = "${aci_application_profile.app_profile.id}"
+  name                    = "${aci_bridge_domain.bridge_domain_video_for_tige_129_2_3.name}"
+  description             = "test push for tige"
+  relation_fv_rs_bd       = "${aci_bridge_domain.bridge_domain_video_for_tige_129_2_3.name}"
+}
