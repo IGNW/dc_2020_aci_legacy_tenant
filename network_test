@@ -1,0 +1,18 @@
+resource "aci_bridge_domain" "bridge_domain_test_127_0_0" {
+  tenant_dn               = "${aci_tenant.tenant.id}"
+  relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
+  name                    = "test"
+}
+
+resource "aci_subnet" "subnet_test_127_0_0" {
+  bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_test_127_0_0.id}"
+  ip                      = "127.0.0.1/30"
+  scope                   = "private"
+}
+
+resource "aci_application_epg" "epg_test_127_0_0" {
+  application_profile_dn  = "${aci_application_profile.app_profile.id}"
+  name                    = "${aci_bridge_domain.bridge_domain_test_127_0_0.name}"
+  description             = "test"
+  relation_fv_rs_bd       = "${aci_bridge_domain.bridge_domain_test_127_0_0.name}"
+}
