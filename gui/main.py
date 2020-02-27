@@ -2,15 +2,18 @@ from SourceControlMgmt.SourceControlMgmt import SourceControlMgmt
 from jinja2 import FileSystemLoader, Environment
 from datetime import datetime
 
+
 def pre():
     # No data to pull from anything
     return locals()
 
+
 def main(**kwargs):
+    repo_name = 'dc_2020_aci_legacy_tenant'
     now = datetime.now()
     str_now = now.strftime("%Y%m%d-%H%M%S")
 
-    templateLoader = FileSystemLoader(searchpath=f'./repos/dc_2020_aci_tenants/gui')
+    templateLoader = FileSystemLoader(searchpath=f'./repos/{repo_name}/gui')
     templateEnv = Environment(loader=templateLoader)
     template = templateEnv.get_template('terraform.j2')
 
@@ -20,9 +23,7 @@ def main(**kwargs):
     name = kwargs['name']
     name_ip_w_underscores = f"{name}_{ip_octects[0]}_{ip_octects[1]}_{ip_octects[2]}"
     scope = kwargs['routing']
-    new_branch =  f'{name_ip_w_underscores}_{str_now}'
-
-
+    new_branch = f'{name_ip_w_underscores}_{str_now}'
     tf_file_name = f'network_{ name }'
 
     terraform_file = template.render(
@@ -37,7 +38,7 @@ def main(**kwargs):
         username=kwargs['github_username'],
         password=kwargs['github_password'],
         email=kwargs['github_email_address'],
-        repo_name='dc_2020_aci_tenants',
+        repo_name=repo_name,
         repo_owner='IGNW',
         friendly_name='DevNet Connect 2020 ACI Tenants'
     )
@@ -51,13 +52,14 @@ def main(**kwargs):
         s.delete_local_copy_of_repo()
         s.get_all_current_branches()
         pr_results = s.create_git_hub_pull_request(
-            destination_branch="master", 
-            source_branch=new_branch, 
-            title=f"Pull Request {name_ip_w_underscores}", 
+            destination_branch="master",
+            source_branch=new_branch,
+            title=f"Pull Request {name_ip_w_underscores}",
             body="")
-        return pr_results 
+        return pr_results
     else:
         return {'Results:': 'Invalid Credentials'}
+
 
 if __name__ == "__main__":
     vars = pre()

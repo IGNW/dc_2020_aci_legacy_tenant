@@ -1,0 +1,7 @@
+display_name: ACI Legacy Tenant
+description: |
+    This is the description for the<br>
+    ACI Legacy Tenant for the Devnet Demo.<br>
+    <br>
+    It's multiline and has HTML support<br>
+    <a href="https://www.google.com">Google</a>
