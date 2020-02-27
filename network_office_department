@@ -1,0 +1,18 @@
+resource "aci_bridge_domain" "bridge_domain_office_department_127_0_0" {
+  tenant_dn               = "${aci_tenant.tenant.id}"
+  relation_fv_rs_ctx      = "${aci_vrf.vrf.name}"
+  name                    = "office_department"
+}
+
+resource "aci_subnet" "subnet_office_department_127_0_0" {
+  bridge_domain_dn        = "${aci_bridge_domain.bridge_domain_office_department_127_0_0.id}"
+  ip                      = "127.0.0.1/30"
+  scope                   = "public"
+}
+
+resource "aci_application_epg" "epg_office_department_127_0_0" {
+  application_profile_dn  = "${aci_application_profile.app_profile.id}"
+  name                    = "${aci_bridge_domain.bridge_domain_office_department_127_0_0.name}"
+  description             = "joe_test"
+  relation_fv_rs_bd       = "${aci_bridge_domain.bridge_domain_office_department_127_0_0.name}"
+}
