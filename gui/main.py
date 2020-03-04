@@ -36,7 +36,7 @@ def main(**kwargs):
 
     s = SourceControlMgmt(
         username=kwargs['github_username'],
-        password=kwargs['github_password'],
+        password=kwargs['github_oauth_token'],
         email=kwargs['github_email_address'],
         repo_name=repo_name,
         repo_owner='IGNW',

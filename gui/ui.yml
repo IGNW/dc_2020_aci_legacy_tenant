@@ -10,9 +10,16 @@ routing:
     options:
         - private
         - public
+spacing:
+    type: paragraph
+    default: |
+        <br>
+        <br>
+        <h2>Authentication</h2>
+        <hr>
 github_username:
     type: text
-github_password:
+github_oauth_token:
     type: password 
 github_email_address:
     type: text
