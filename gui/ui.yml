@@ -16,6 +16,7 @@ spacing:
         <br>
         <br>
         <h2>Authentication</h2>
+        <a href="https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql" target="_blank">Setting up Oauth</a>
         <hr>
 github_username:
     type: text
